@@ -5,413 +5,278 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Henry Springer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #faf8f4;
-      --ink: #1a1814;
-      --mid: #6b6760;
-      --accent: #c8622a;
-      --rule: #e2ddd6;
-      --serif: 'DM Serif Display', Georgia, serif;
-      --sans: 'DM Sans', system-ui, sans-serif;
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #16161e;
+      --border: #222230;
+      --text: #e8e8f0;
+      --muted: #7a7a94;
+      --accent: #6c63ff;
+      --accent2: #ff6b6b;
+      --green: #00d4aa;
+      --sans: 'Space Grotesk', system-ui, sans-serif;
+      --display: 'Syne', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-    body {
-      background: var(--cream);
-      color: var(--ink);
-      font-family: var(--sans);
-      font-weight: 300;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 3rem;
-      background: rgba(250, 248, 244, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--rule);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-
     .nav-name {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      letter-spacing: 0.01em;
-      color: var(--ink);
-      text-decoration: none;
+      font-family: var(--display); font-size: 1rem; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: 0.02em;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
+    .nav-name span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      font-size: 0.8rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.2s;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--accent); }
 
     /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 6rem 3rem 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
+    .hero { padding-top: 4.5rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
     .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-      width: 100%;
-      opacity: 0;
-      transform: translateY(24px);
-      animation: fadeUp 0.9s ease forwards 0.15s;
+      display: grid; grid-template-columns: 380px 1fr;
+      min-height: calc(100vh - 4.5rem);
+      opacity: 0; animation: fadeIn 1s ease forwards 0.1s;
     }
 
-    .hero-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
+    .hero-photo-wrap {
+      position: relative; overflow: hidden;
+    }
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 70%, var(--bg) 100%),
+                  linear-gradient(to top, var(--bg) 0%, transparent 30%);
+    }
+    .hero-photo {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center; display: block;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    .hero-content {
+      padding: 5rem 3rem 4rem 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid var(--border);
+      position: relative;
+    }
+
+    /* Glowing accent line */
+    .hero-content::before {
+      content: '';
+      position: absolute; left: -1px; top: 15%; bottom: 15%;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease infinite;
     }
 
     .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 5vw, 5rem);
-      line-height: 1.05;
-      color: var(--ink);
-      margin-bottom: 1.5rem;
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: 0.95; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 0.25rem;
     }
+    .hero h1 .accent-name { color: var(--accent); display: block; }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
+    .hero-subtitle {
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 2rem; margin-top: 0.75rem;
     }
 
     .hero-desc {
-      font-size: 1.05rem;
-      color: var(--mid);
-      line-height: 1.75;
-      max-width: 420px;
+      font-size: 0.95rem; color: var(--muted); line-height: 1.85; max-width: 460px;
     }
+    .hero-desc + .hero-desc { margin-top: 1rem; }
 
-    .hero-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding-left: 3rem;
-      border-left: 1px solid var(--rule);
+    .hero-links { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      background: var(--accent); color: #fff;
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
+    .btn-primary:hover { background: #8580ff; box-shadow: 0 0 20px rgba(108,99,255,0.4); }
 
-    .hero-stat {
-      opacity: 0;
-      transform: translateY(16px);
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      background: transparent; color: var(--text);
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
     }
-    .hero-stat:nth-child(1) { animation: fadeUp 0.7s ease forwards 0.4s; }
-    .hero-stat:nth-child(2) { animation: fadeUp 0.7s ease forwards 0.55s; }
-    .hero-stat:nth-child(3) { animation: fadeUp 0.7s ease forwards 0.7s; }
-
-    .hero-stat-num {
-      font-family: var(--serif);
-      font-size: 2.4rem;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .hero-stat-label {
-      font-size: 0.8rem;
-      color: var(--mid);
-      letter-spacing: 0.04em;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-top: 2rem;
-      padding: 0.75rem 1.75rem;
-      background: var(--ink);
-      color: var(--cream);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .hero-cta:hover { background: var(--accent); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
     /* SECTIONS */
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 5rem 3rem;
-      border-top: 1px solid var(--rule);
-    }
+    section { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; position: relative; z-index: 1; }
+    section + section { border-top: 1px solid var(--border); }
 
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
     }
+    .section-eyebrow::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--accent); opacity: 0.4; }
 
     .section-title {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      line-height: 1.15;
-      margin-bottom: 3rem;
-    }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      font-size: 1rem;
-      color: var(--mid);
-      margin-bottom: 1.25rem;
-      line-height: 1.8;
-    }
-
-    .about-text p strong {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .about-aside {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .tag-group-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 0.6rem;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      font-size: 0.78rem;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid var(--rule);
-      color: var(--ink);
-      letter-spacing: 0.02em;
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.1; letter-spacing: -0.01em;
+      color: var(--text); margin-bottom: 3.5rem;
     }
 
     /* EXPERIENCE */
-    .exp-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
     .exp-item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 3rem;
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--rule);
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 3rem; padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
     }
+    .exp-item:first-child { border-top: 1px solid var(--border); }
+    .exp-item:hover { background: rgba(108,99,255,0.03); }
 
-    .exp-item:first-child { border-top: 1px solid var(--rule); }
-
-    .exp-left { padding-top: 0.2rem; }
-
+    .exp-left { padding-top: 0.25rem; }
     .exp-company {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
     }
-
-    .exp-dates {
-      font-size: 0.8rem;
-      color: var(--mid);
-    }
+    .exp-dates { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 
     .exp-role {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-      color: var(--ink);
+      font-family: var(--display); font-size: 1.1rem; font-weight: 600;
+      color: var(--text); margin-bottom: 0.75rem; line-height: 1.3;
     }
-
-    .exp-desc {
-      font-size: 0.92rem;
-      color: var(--mid);
-      line-height: 1.75;
-    }
+    .exp-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
 
     /* PROJECTS */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
 
     .project-card {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
+      background: var(--surface); padding: 2.5rem;
+      position: relative; overflow: hidden;
       transition: background 0.25s;
+      cursor: default;
     }
-
-    .project-card:hover { background: var(--accent); }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--green));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .project-card:hover { background: var(--surface2); }
+    .project-card:hover::before { opacity: 1; }
 
     .project-num {
-      font-family: var(--serif);
-      font-size: 3rem;
-      opacity: 0.12;
-      position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      line-height: 1;
+      font-family: var(--display); font-size: 4rem; font-weight: 800;
+      opacity: 0.06; position: absolute; top: 1rem; right: 1.5rem; line-height: 1;
+      color: var(--accent);
     }
 
     .project-tag {
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(250,248,244,0.5);
-      margin-bottom: 1.25rem;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.25rem; display: block;
     }
 
     .project-title {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      line-height: 1.25;
-      margin-bottom: 1rem;
+      font-family: var(--display); font-size: 1.2rem; font-weight: 700;
+      line-height: 1.2; margin-bottom: 1rem; color: var(--text);
     }
 
-    .project-desc {
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: rgba(250,248,244,0.7);
-    }
+    .project-desc { font-size: 0.85rem; line-height: 1.75; color: var(--muted); }
 
     /* CONTACT */
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .contact-text { font-size: 1rem; color: var(--muted); line-height: 1.85; }
 
-    .contact-text {
-      font-size: 1rem;
-      color: var(--mid);
-      line-height: 1.8;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
+    .contact-links { display: flex; flex-direction: column; }
     .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: var(--ink);
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid var(--rule);
-      transition: color 0.2s;
+      display: flex; align-items: center; gap: 1.25rem;
+      text-decoration: none; color: var(--text);
+      padding: 1.25rem 0; border-bottom: 1px solid var(--border);
+      transition: color 0.2s, padding-left 0.2s;
     }
-
-    .contact-link:hover { color: var(--accent); }
-
+    .contact-link:first-child { border-top: 1px solid var(--border); }
+    .contact-link:hover { color: var(--accent); padding-left: 0.5rem; }
     .contact-link-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--mid);
-      width: 80px;
-      flex-shrink: 0;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); width: 80px; flex-shrink: 0;
     }
-
-    .contact-link-value {
-      font-size: 0.95rem;
-    }
+    .contact-link-value { font-size: 0.92rem; }
 
     /* FOOTER */
     footer {
-      border-top: 1px solid var(--rule);
-      padding: 2rem 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem; max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      position: relative; z-index: 1;
     }
+    footer p { font-size: 0.75rem; color: var(--muted); }
 
-    footer p {
-      font-size: 0.78rem;
-      color: var(--mid);
-    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1.5rem; }
-      .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .hero-inner, .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-meta { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 2rem; flex-direction: row; flex-wrap: wrap; }
+      .hero-inner { grid-template-columns: 1fr; min-height: unset; }
+      .hero-photo-wrap { height: 65vw; max-height: 380px; }
+      .hero-content { padding: 2.5rem 1.5rem; border-left: none; border-top: 1px solid var(--border); }
+      .hero-content::before { display: none; }
+      section { padding: 4rem 1.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
       .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
   </style>
@@ -419,82 +284,36 @@
 <body>
 
   <nav>
-    <a href="#" class="nav-name">Henry Springer</a>
+    <a href="#" class="nav-name">Henry<span>.</span>Springer</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
-      <div>
-        <p class="hero-label">Operator · Builder · AI-Native</p>
-        <h1>Systems that<br><em>scale.</em></h1>
-        <p class="hero-desc">Operator and systems builder with a track record spanning entrepreneurship to senior roles at a top-tier tech company. Strong bias toward automation and AI-powered tooling.</p>
-        <a href="#contact" class="hero-cta">Get in touch →</a>
+      <div class="hero-photo-wrap">
+        <img src="photo.jpeg" alt="Henry Springer" class="hero-photo" />
       </div>
-      <div class="hero-meta">
-        <div class="hero-stat">
-          <div class="hero-stat-num">1,000+</div>
-          <div class="hero-stat-label">Revenue team members using tools I've built</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">Top 5%</div>
-          <div class="hero-stat-label">Claude usage across Shopify's revenue org</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">$1M+</div>
-          <div class="hero-stat-label">In sales as a founder, exited via acquisition</div>
+      <div class="hero-content">
+        
+        <h1>Henry<span class="accent-name">Springer.</span></h1>
+        <p class="hero-subtitle">Operator · Builder · AI-Native</p>
+        <p class="hero-desc">I grew up in Maine, headed west to study at CU Boulder, then jumped straight into startup life. I joined Notion as employee #8 — a TechStars-backed smart home startup that was later acquired by Comcast. From there I spent five years building and eventually selling Basis Hydration — a DTC brand I grew from scratch to $1M in sales before it was acquired.</p>
+        <p class="hero-desc">That experience led me to Shopify, where I've spent the last three years building operational systems and AI-powered tooling for one of the fastest-growing revenue organizations in tech.</p>
+        <p class="hero-desc">Outside of work I'm a husband and dad to a family of five. I love spending time with my family, getting out on the golf course when I can, and catching up with friends.</p>
+        <div class="hero-links">
+          <a href="https://x.com/henry_springer" target="_blank" class="btn-primary">X / Twitter →</a>
+          <a href="#contact" class="btn-ghost">Get in touch →</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <p class="section-label">About</p>
-    <h2 class="section-title">Builder at heart,<br>operator by trade.</h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>I've spent my career at the intersection of <strong>strategy, systems, and scale</strong> — building the operational infrastructure that lets revenue organizations grow with clarity and speed.</p>
-        <p>At Shopify, I've stood up a resource planning function from scratch, overhauled incentive compensation design at the system level, and built AI-powered tooling that's now used daily across the revenue org. I'm one of the earliest and most active Claude power users in the organization.</p>
-        <p>Before Shopify, I <strong>founded and exited Basis Hydration</strong>, a DTC brand I grew to $1M in sales before acquisition. That experience — building something from nothing, wearing every hat, making every dollar count — shapes how I approach every operational challenge today.</p>
-        <p>Outside of work, I'm based in Portland, ME with my wife and our twins.</p>
-      </div>
-      <div class="about-aside">
-        <div>
-          <p class="tag-group-label">Expertise</p>
-          <div class="tags">
-            <span class="tag">Incentive Compensation</span>
-            <span class="tag">Resource Planning</span>
-            <span class="tag">Revenue Operations</span>
-            <span class="tag">AI Tooling</span>
-            <span class="tag">Systems Design</span>
-            <span class="tag">Strategic Planning</span>
-          </div>
-        </div>
-        <div>
-          <p class="tag-group-label">Tools & Tech</p>
-          <div class="tags">
-            <span class="tag">Claude / AI</span>
-            <span class="tag">Salesforce</span>
-            <span class="tag">SQL</span>
-            <span class="tag">Looker</span>
-            <span class="tag">Google Sheets</span>
-            <span class="tag">Slack API</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
   <section id="experience">
-    <p class="section-label">Experience</p>
+    <p class="section-eyebrow">Experience</p>
     <h2 class="section-title">Where I've worked.</h2>
     <div class="exp-list">
 
@@ -505,7 +324,7 @@
         </div>
         <div>
           <p class="exp-role">Systems Architecture Lead, Sales Compensation</p>
-          <p class="exp-desc">Player/coach role owning end-to-end incentive compensation — design, implementation, and ongoing management — across a 1,000+ person revenue organization. Led overhaul of compensation design from booked-revenue to a dynamic billed-revenue system. Selected for Shopify's annual Builders Club, recognizing the top 100 leaders in the revenue org.</p>
+          <p class="exp-desc">Player/coach role owning end-to-end incentive compensation — design, implementation, and ongoing management — across a 1,000+ person revenue organization. Led overhaul of compensation design from a booked-revenue to a dynamic billed-revenue system. Selected for Shopify's annual Builders Club, recognizing the top 100 leaders in the revenue org.</p>
         </div>
       </div>
 
@@ -537,7 +356,7 @@
           <p class="exp-dates">2017 – 2022</p>
         </div>
         <div>
-          <p class="exp-role">Co-Founder & CEO <span style="font-family:var(--sans);font-size:0.85rem;color:var(--mid);font-style:normal;">(Acquired by Creatd)</span></p>
+          <p class="exp-role">Co-Founder & CEO <span style="font-size:0.85rem;color:var(--muted);font-weight:300;">(Acquired by Creatd)</span></p>
           <p class="exp-desc">Founded DTC hydration brand, grew to $1M in sales, and exited via acquisition. Self-taught paid media, raised $900K in financing, and launched in 300+ retailers including Whole Foods and Kroger.</p>
         </div>
       </div>
@@ -548,7 +367,7 @@
           <p class="exp-dates">2015 – 2017</p>
         </div>
         <div>
-          <p class="exp-role">Growth Marketing Manager <span style="font-family:var(--sans);font-size:0.85rem;color:var(--mid);font-style:normal;">(Acquired by Comcast)</span></p>
+          <p class="exp-role">Growth Marketing Manager <span style="font-size:0.85rem;color:var(--muted);font-weight:300;">(Acquired by Comcast)</span></p>
           <p class="exp-desc">Joined as employee #8. Automated CEO/Board KPI reporting and more than doubled the email list to 13,000+ subscribers through systematic A/B testing.</p>
         </div>
       </div>
@@ -567,59 +386,49 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects">
-    <p class="section-label">Projects</p>
+    <p class="section-eyebrow">Projects</p>
     <h2 class="section-title">Tools I've built.</h2>
     <div class="projects-grid">
 
       <div class="project-card">
         <span class="project-num">01</span>
-        <p class="project-tag">Compensation · AI · Full-Stack</p>
+        <span class="project-tag">Compensation · AI · Full-Stack</span>
         <h3 class="project-title">Compensation Audit Platform</h3>
         <p class="project-desc">Full-stack AI web application for Shopify's 2026 compensation rollout. Features automated flagging, Slack integration, messaging, and database management — eliminating manual audit toil and removing the need to backfill headcount.</p>
       </div>
 
       <div class="project-card">
         <span class="project-num">02</span>
-        <p class="project-tag">Recruiting · AI · Assessment</p>
+        <span class="project-tag">Recruiting · AI · Assessment</span>
         <h3 class="project-title">AI-Native Hiring Tool</h3>
         <p class="project-desc">Built for Shopify's revenue org to identify AI-native sales talent. Uses unique interview tactics and AI analysis of candidate outputs to surface candidates with genuine AI fluency — not just familiarity.</p>
       </div>
 
       <div class="project-card">
         <span class="project-num">03</span>
-        <p class="project-tag">Planning · Forecasting · Operations</p>
+        <span class="project-tag">Planning · Forecasting · Operations</span>
         <h3 class="project-title">Blueprint Headcount Planner</h3>
-        <p class="project-desc">Original headcount planning system for Shopify's revenue org. Mapped all necessary roles to run a commercial organization and built forecasting tools to model sales capacity and inform recruiter planning and financial forecasts.</p>
+        <p class="project-desc">Original headcount planning system for Shopify's revenue org. Mapped all roles needed to run a commercial organization and built forecasting tools to model sales capacity and inform recruiter planning and financial forecasts.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
-    <p class="section-label">Contact</p>
+    <p class="section-eyebrow">Contact</p>
     <h2 class="section-title">Let's talk.</h2>
     <div class="contact-inner">
-      <p class="contact-text">I'm always open to interesting conversations — whether it's a role, a collaboration, or just a good problem to think through together. Best way to reach me is email.</p>
+      <p class="contact-text">Always open to interesting conversations — whether it's a role, a collaboration, or just a good problem to think through. Best way to reach me is email.</p>
       <div class="contact-links">
-        <a href="mailto:henry.e.springer@gmail.com" class="contact-link">
+        <a href="/cdn-cgi/l/email-protection#771f1219050e5912590407051e1910120537101a161e1b5914181a" class="contact-link">
           <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">henry.e.springer@gmail.com</span>
+          <span class="contact-link-value"><span class="__cf_email__" data-cfemail="4f272a213d36612a613c3f3d2621282a3d0f28222e2623612c2022">[email&#160;protected]</span></span>
         </a>
         <a href="tel:2076534617" class="contact-link">
           <span class="contact-link-label">Phone</span>
           <span class="contact-link-value">(207) 653-4617</span>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2026 Henry Springer</p>
-    <p>Portland, ME</p>
-  </footer>
-
-</body>
-</html>
+        <a href="https://x.com/henry_springer" target="_blank" class="contact-link">
+          <span class="contact-link-label">X / Twitter</span>
+          <span class="contact-link-value">@henry_springer</span>

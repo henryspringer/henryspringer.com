@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Agent Deployer: A Real Job That Already Exists — Henry Springer</title>
+  <meta property="og:title" content="The Agent Deployer: A Real Job That Already Exists" />
+  <meta property="og:description" content="Aaron Levie wrote about a new enterprise role. I read it and thought — yeah, I just did that job." />
+  <meta property="og:image" content="https://henryspringer.com/photo.jpeg" />
+  <meta property="og:url" content="https://henryspringer.com/blog/agent-deployer" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --border: #222230;
+      --text: #e8e8f0;
+      --muted: #7a7a94;
+      --accent: #6c63ff;
+      --green: #00d4aa;
+      --sans: 'Space Grotesk', system-ui, sans-serif;
+      --display: 'Syne', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--text); text-decoration: none; }
+    .nav-name span { color: var(--accent); }
+    .nav-back { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+
+    .post {
+      max-width: 720px; margin: 0 auto;
+      padding: 8rem 2rem 6rem;
+      position: relative; z-index: 1;
+    }
+
+    .post-eyebrow {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+    }
+    .post-eyebrow::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--accent); opacity: 0.4; }
+
+    .post-title {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 2.5rem;
+    }
+
+    .post-divider {
+      width: 100%; height: 1px; background: var(--border); margin-bottom: 2.5rem;
+    }
+
+    .post-body { font-size: 1.05rem; color: var(--muted); line-height: 1.9; }
+    .post-body p { margin-bottom: 1.5rem; }
+    .post-body p:last-child { margin-bottom: 0; }
+    .post-body em { color: var(--text); font-style: italic; }
+    .post-body strong { color: var(--text); font-weight: 500; }
+
+    .post-footer {
+      margin-top: 4rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .post-author { font-size: 0.85rem; color: var(--muted); }
+    .post-author strong { color: var(--text); font-weight: 500; }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      background: transparent; color: var(--text);
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .post { padding: 7rem 1.5rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-name">Henry<span>.</span>Springer</a>
+    <a href="../index.html#writing" class="nav-back">← Back</a>
+  </nav>
+
+  <article class="post">
+    <p class="post-eyebrow">Essay · 2026</p>
+    <h1 class="post-title">The Agent Deployer: A Real Job That Already Exists</h1>
+    <div class="post-divider"></div>
+    <div class="post-body">
+      <p>Aaron Levie wrote something recently that stuck with me. He laid out this idea of a new enterprise role — the "agent deployer" — someone whose job is to find the highest-leverage workflows on a team and figure out how to throw AI agents at them. Not a centralized IT function. Not a prompt engineer. Someone who lives in the business, understands the process deeply, and has the technical chops to actually connect things up.</p>
+      <p>I read it and thought — yeah, I just did that job.</p>
+      <p>At Shopify, we rebuilt our entire sales compensation model from the ground up for 2026. The new system ties rep earnings to actual long-term merchant success instead of just closing deals. It's a big shift, and a genuinely better model — but rolling it out created a real operational problem.</p>
+      <p>The old audit process? Two people. One auditing deals against the comp Rules of Engagement to make sure reps were closing legitimate business. One handling the support tickets that came in when reps had questions or flagged issues. It worked, but it was slow, reactive, and honestly kind of painful for everyone.</p>
+      <p>The big problem with a slow audit wasn't just the headcount cost. It was the rep experience. Imagine spending days working a deal — building the relationship, doing discovery, putting together a proposal — and then finding out afterward that it gets flagged in the audit. That's a terrible experience and a massive waste of time for everyone involved.</p>
+      <p>So I built an AI-powered web app to fix it. Automated flagging against the ROE rules, Slack integration to surface alerts where reps already live, and full database management to keep everything clean and auditable. The whole thing runs in real time now.</p>
+      <p>Here's what that actually changed: reps know before they start working a deal whether it's going to have issues. Not after. Before. That's a fundamentally different experience. And on the ops side — what used to take two people now runs with one, freeing the other up to do work that actually moves the needle instead of manually chasing audit flags all day.</p>
+      <p>That's the thing Levie's post nails that I don't think people fully appreciate yet. The win isn't just "AI does the task faster." It's that AI changes <em>when</em> the task happens, which changes the whole shape of the workflow. Auditing moved from a lagging check to a real-time gate, and that unlocked a totally different rep experience and a much cleaner operational model.</p>
+      <p>The people who will win in this next wave aren't just the ones who know how to prompt. It's the ones who can look at a business process, find where the leverage is, and actually build the thing that fixes it. That's the job. And yeah, it's a great job.</p>
+    </div>
+    <div class="post-footer">
+      <p class="post-author">By <strong>Henry Springer</strong> · 2026</p>
+      <a href="../index.html#writing" class="btn-ghost">← Back to site</a>
+    </div>
+  </article>
+
+</body>
+</html>

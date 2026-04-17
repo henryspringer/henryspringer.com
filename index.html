@@ -295,6 +295,30 @@
     }
     footer p { font-size: 0.75rem; color: var(--muted); }
 
+
+    /* WRITING */
+    .writing-card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 3rem; position: relative; overflow: hidden;
+      transition: border-color 0.25s;
+    }
+    .writing-card:hover { border-color: var(--accent); }
+    .writing-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--green));
+    }
+    .writing-tag {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: block;
+    }
+    .writing-title {
+      font-family: var(--display); font-size: 1.6rem; font-weight: 700;
+      line-height: 1.2; color: var(--text); margin-bottom: 1.5rem;
+    }
+    .writing-body { font-size: 0.95rem; color: var(--muted); line-height: 1.85; }
+    .writing-body p { margin-bottom: 1.25rem; }
+    .writing-body p:last-child { margin-bottom: 0; }
+
     @keyframes fadeIn { to { opacity: 1; } }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
@@ -319,6 +343,7 @@
   <nav>
     <a href="#" class="nav-name">Henry<span>.</span>Springer</a>
     <ul class="nav-links">
+      <li><a href="#writing">Writing</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -329,6 +354,7 @@
   </nav>
 
   <div class="mobile-menu" id="mobile-menu">
+    <a href="#writing" class="mobile-link">Writing</a>
     <a href="#experience" class="mobile-link">Experience</a>
     <a href="#projects" class="mobile-link">Projects</a>
     <a href="#contact" class="mobile-link">Contact</a>
@@ -368,6 +394,19 @@
       </div>
     </div>
   </div>
+
+  <section id="writing">
+    <p class="section-eyebrow">Writing</p>
+    <h2 class="section-title">On building with AI.</h2>
+    <div class="writing-card">
+      <span class="writing-tag">Essay · 2026</span>
+      <h3 class="writing-title">The Agent Deployer: A Real Job That Already Exists</h3>
+      <div class="writing-body">
+        <p>Aaron Levie recently wrote about a new enterprise role — the "agent deployer" — someone who lives in the business, understands the process deeply, and has the technical chops to actually connect AI to it. I read it and thought: yeah, I just did that job. Here's what it actually looked like.</p>
+      </div>
+      <a href="blog/agent-deployer.html" class="btn-ghost" style="margin-top: 1.5rem; display: inline-flex;">Read more →</a>
+    </div>
+  </section>
 
   <section id="experience">
     <p class="section-eyebrow">Experience</p>

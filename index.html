@@ -251,6 +251,61 @@
     }
     .exp-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
 
+    /* WHAT'S NEW */
+    .whats-new {
+      max-width: 1200px; margin: 0 auto; padding: 4rem 3rem 0;
+      position: relative; z-index: 1;
+    }
+    .whats-new-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .whats-new-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--bg);
+      background: var(--accent); padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+    }
+    .whats-new-line { flex: 1; height: 1px; background: var(--border); }
+    .whats-new-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+    .whats-new-item {
+      display: flex; flex-direction: column; gap: 0.6rem;
+      padding: 2rem 2.25rem;
+      background: var(--surface);
+      text-decoration: none; color: var(--text);
+      transition: background 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .whats-new-item::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--green));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .whats-new-item:hover { background: var(--surface2); }
+    .whats-new-item:hover::before { opacity: 1; }
+    .whats-new-type {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .whats-new-title {
+      font-family: var(--display); font-size: 1.15rem; font-weight: 700;
+      line-height: 1.3; color: var(--text);
+    }
+    .whats-new-arrow {
+      font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;
+      transition: color 0.2s;
+    }
+    .whats-new-item:hover .whats-new-arrow { color: var(--accent); }
+
+    /* NEW badge on project cards */
+    .badge-new {
+      display: inline-block;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--bg);
+      background: var(--green); padding: 0.2rem 0.5rem;
+      border-radius: 2px; margin-left: 0.6rem; vertical-align: middle;
+    }
+
     /* PROJECTS */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); }
 
@@ -364,6 +419,8 @@
       .hero-content::before { display: none; }
       section { padding: 4rem 1.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
+      .whats-new { padding: 2.5rem 1.5rem 0; }
+      .whats-new-items { grid-template-columns: 1fr; }
       .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
       .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -375,9 +432,9 @@
   <nav>
     <a href="#" class="nav-name">Henry<span>.</span>Springer</a>
     <ul class="nav-links">
-      <li><a href="#writing">Writing</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#writing">Writing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -386,9 +443,9 @@
   </nav>
 
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#writing" class="mobile-link">Writing</a>
     <a href="#experience" class="mobile-link">Experience</a>
     <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#writing" class="mobile-link">Writing</a>
     <a href="#contact" class="mobile-link">Contact</a>
   </div>
 
@@ -427,18 +484,24 @@
     </div>
   </div>
 
-  <section id="writing">
-    <p class="section-eyebrow">Writing</p>
-    <h2 class="section-title">On building with AI.</h2>
-    <div class="writing-card">
-      <span class="writing-tag">Essay · 2026</span>
-      <h3 class="writing-title">The Agent Deployer: A Real Job That Already Exists</h3>
-      <div class="writing-body">
-        <p>Aaron Levie recently wrote about a new enterprise role — the "agent deployer" — someone who lives in the business, understands the process deeply, and has the technical chops to actually connect AI to it. I read it and thought: yeah, I just did that job. Here's what it actually looked like.</p>
-      </div>
-      <a href="blog/agent-deployer.html" class="btn-ghost" style="margin-top: 1.5rem; display: inline-flex;">Read more →</a>
+  <div class="whats-new">
+    <div class="whats-new-header">
+      <span class="whats-new-label">What's New</span>
+      <div class="whats-new-line"></div>
     </div>
-  </section>
+    <div class="whats-new-items">
+      <a href="blog/agent-deployer.html" class="whats-new-item">
+        <span class="whats-new-type">Essay · 2026</span>
+        <span class="whats-new-title">How We Rebuilt Comp Auditing With AI</span>
+        <span class="whats-new-arrow">Read more →</span>
+      </a>
+      <a href="/financial-planner/" class="whats-new-item">
+        <span class="whats-new-type">Open Source · New</span>
+        <span class="whats-new-title">Springer Family Financial Planner</span>
+        <span class="whats-new-arrow">Try it →</span>
+      </a>
+    </div>
+  </div>
 
   <section id="experience">
     <p class="section-eyebrow">Experience</p>
@@ -549,7 +612,7 @@
       <div class="project-card">
         <span class="project-num">04</span>
         <span class="project-tag">Personal Finance · Open Source</span>
-        <h3 class="project-title">Financial Planner</h3>
+        <h3 class="project-title">Financial Planner<span class="badge-new">New</span></h3>
         <p class="project-desc">Single-file HTML financial planner I built for my own household and open-sourced. All data stays in your browser. Designed to be personalized by an AI agent: hand it your statements and it adapts the code to your accounts.</p>
         <div class="project-links">
           <a href="/financial-planner/" class="project-link">Live demo →</a>
@@ -560,12 +623,29 @@
     </div>
   </section>
 
+  <section id="writing">
+    <p class="section-eyebrow">Writing</p>
+    <h2 class="section-title">On building with AI.</h2>
+    <div class="writing-card">
+      <span class="writing-tag">Essay · 2026</span>
+      <h3 class="writing-title">How We Rebuilt Comp Auditing With AI</h3>
+      <div class="writing-body">
+        <p>Aaron Levie recently wrote about a new enterprise role — the "agent deployer" — someone who lives in the business, understands the process deeply, and has the technical chops to actually connect AI to it. I read it and thought: yeah, I just did that job. Here's what it actually looked like.</p>
+      </div>
+      <a href="blog/agent-deployer.html" class="btn-ghost" style="margin-top: 1.5rem; display: inline-flex;">Read more →</a>
+    </div>
+  </section>
+
   <section id="contact">
     <p class="section-eyebrow">Contact</p>
     <h2 class="section-title">Let's talk.</h2>
     <div class="contact-inner">
       <p class="contact-text">Always open to interesting conversations — whether it's a role, a collaboration, or just a good problem to think through. Best way to reach me is email.</p>
       <div class="contact-links">
+        <a href="mailto:henry.e.springer@gmail.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">henry.e.springer@gmail.com</span>
+        </a>
         <a href="https://www.linkedin.com/in/henryspringer/" target="_blank" class="contact-link">
           <span class="contact-link-label">LinkedIn</span>
           <span class="contact-link-value">linkedin.com/in/henryspringer</span>

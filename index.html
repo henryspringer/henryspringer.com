@@ -252,7 +252,7 @@
     .exp-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
 
     /* PROJECTS */
-    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); }
 
     .project-card {
       background: var(--surface); padding: 2.5rem;
@@ -287,6 +287,17 @@
     }
 
     .project-desc { font-size: 0.85rem; line-height: 1.75; color: var(--muted); }
+
+    .project-links { display: flex; gap: 0.5rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--border); color: var(--text);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .project-link:hover { border-color: var(--accent); color: var(--accent); }
 
     /* CONTACT */
     .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
@@ -533,6 +544,17 @@
         <span class="project-tag">Planning · Forecasting · Operations</span>
         <h3 class="project-title">Blueprint Headcount Planner</h3>
         <p class="project-desc">Original headcount planning system for Shopify's revenue org. Mapped all roles needed to run a commercial organization and built forecasting tools to model sales capacity and inform recruiter planning and financial forecasts.</p>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">04</span>
+        <span class="project-tag">Personal Finance · Open Source</span>
+        <h3 class="project-title">Financial Planner</h3>
+        <p class="project-desc">Single-file HTML financial planner I built for my own household and open-sourced. All data stays in your browser. Designed to be personalized by an AI agent: hand it your statements and it adapts the code to your accounts.</p>
+        <div class="project-links">
+          <a href="/financial-planner/" class="project-link">Live demo →</a>
+          <a href="https://github.com/henryspringer/financial-planner" target="_blank" class="project-link">Source ↗</a>
+        </div>
       </div>
 
     </div>
